@@ -5,6 +5,18 @@ public class Room {
     private boolean roomOut;
     private String feedback;
     private int rating;
+ @Override
+ public String toString() {
+     return "Room{" +
+             "id=" + id +
+             ", room=" + roomNumber +
+             ", persons='" + numberOfPersons + '\'' +
+             ", days=" + days +
+             ", notOccupied=" + roomOut +
+             ", feedback='" + feedback + '\'' +
+             ", rating=" + rating +
+             '}';
+ }
 
     public Room(int id, int numberOfPersons, int roomNumber, int days){
         this.id = id;

@@ -2,12 +2,13 @@ package Repository;
 import Domain.Room;
 import Domain.RoomValidator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class RoomRepository {
-    private Map<Integer, Room> handling = new HashMap<>();
+    private Map<Integer, Room> hotel = new HashMap<>();
     private RoomValidator validator;
 
     /**
@@ -22,30 +23,30 @@ public class RoomRepository {
      * adding a room to handling
      */
     public void add(Room room) {
-        if (handling.containsKey(room.getId())) {
+        if (hotel.containsKey(room.getId())) {
             throw new RuntimeException("A room with this ID already exists!");
         }
 
-        validator.validate(room);
-        handling.put(room.getId(), room);
+        validator.checkInValidator(room);
+        hotel.put(room.getId(), room);
     }
 
     /**
-     * validate the room to update
+     * checkInValidator the room to update
      * @param room
      */
     public void update(Room room){
-        if(!handling.containsKey(room.getId())){
+        if(!hotel.containsKey(room.getId())){
             throw new RuntimeException("The room with this ID can not be updated!");
         }
-        validator.validate(room);
-        handling.put(room.getId(), room);
+        validator.checkOutValidator(room);
+        hotel.put(room.getRating(), room);
     }
     /**
      * return a list of rooms
      */
     public List<Room> getAll(){
-        return (List<Room>)handling.values();
+        return new ArrayList<>(hotel.values());
     }
 
 }

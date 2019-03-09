@@ -73,8 +73,8 @@ public class Console {
 
     }
     private void handleFeedback(){
-        Map<Integer, Integer> result = service.getResult();
-        for(Integer rating : result.keySet()){
+        Map<Double, Integer> result = service.getResult();
+        for(Double rating : result.keySet()){
             System.out.println("Room number: " + result.get(rating) + " rating: " + rating);
         }
     }

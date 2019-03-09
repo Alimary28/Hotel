@@ -19,13 +19,13 @@ public class RoomService {
      * @param roomNumber
      * @param days
      */
-    public void checkIn(int id, int numberOfPersons, int roomNumber, int days) {
+    public void checkIn(int id, int roomNumber, int numberOfPersons, int days) {
 
         Room room = new Room(id, numberOfPersons, roomNumber, days);
         List<Room> rooms = repository.getAll();
         for (Room r : rooms) {
             if (r.getRoomNumber() == roomNumber && !r.isOutOfRoom()) {
-                throw new RuntimeException("That room is already ocupied!");
+                throw new RuntimeException("That room is already occupied!");
             }
         }
         repository.add(room);
@@ -49,7 +49,7 @@ public class RoomService {
             personsInRoom.setOutOfRoom(true);
             repository.update(personsInRoom);
         } else {
-            throw new RuntimeException("The room is not Ocupied!");
+            throw new RuntimeException("The room is not ocupied!");
         }
     }
     public List<Room> getAll() {
@@ -84,28 +84,28 @@ public class RoomService {
      * @param ratings
      * @return compute the average by ratings
      */
-    public Integer getAverage(List<Integer> ratings){
+    public double getAverage(List<Integer> ratings){
         int sum = 0;
         for(Integer rating : ratings){
             sum += rating;
         }
-        return sum / ratings.size();
+        return (double)sum / ratings.size();
     }
 
     /**
      *
      * @return decreasing order of rooms by rating
      */
-    public Map<Integer, Integer> getResult(){
-        Map<Integer, Integer> result = new TreeMap<>();
+    public Map<Double, Integer> getResult(){
+        Map<Double, Integer> result = new TreeMap<>();
         for(Integer room : getAllRooms()){
             List<Integer> ratings = getAllByNumber(room);
-            Integer average = getAverage(ratings);
+            double average = getAverage(ratings);
             result.put(average, room);
         }
-        Map<Integer, Integer> decreasing = new TreeMap<>(new Comparator<Integer>() {
+        Map<Double, Integer> decreasing = new TreeMap<>(new Comparator<Double>() {
             @Override
-            public int compare(Integer rating1, Integer rating2) {
+            public int compare(Double rating1, Double rating2) {
                 return rating2.compareTo(rating1);
             }
         });
