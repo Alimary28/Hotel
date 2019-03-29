@@ -18,7 +18,7 @@ public class Console {
         System.out.println("1. Check in");
         System.out.println("2. Check out");
         System.out.println("3. Show the room and the rating");
-        System.out.println("a. Show all rooms");
+        System.out.println("4. Show all rooms");
         System.out.println("x. Exit");
     }
 
@@ -33,7 +33,7 @@ public class Console {
                 handleCheckOut();
             } else if (option.equals("3")) {
                 handleFeedback();
-            } else if (option.equals("a")) {
+            } else if (option.equals("4")) {
                 handleShowAll();
             } else if (option.equals("x")) {
                 break;
